@@ -1,63 +1,37 @@
 #include "hash_table/hash_table.h"
 
-using namespace std;
-
-// NODE INITIALIZATION
-template <class Object>
-Node<Object>::Node(Object* object, char* key) {
-        object = object;
-        key = key;
-        next = NULL;
-};
 
 
-// HASH TABLE CONSTRUCTORS
-template <class Object>
-Hash_Table<Object>::Hash_Table(hashfunction* hash_function, int size) {
-    entries = new Node<Object>*[size];
-    hash_function = hash_function;
-    size = size;
-}
+// HASH TABLE GET AND SET METHODS
 
-template <class Object>
-Hash_Table<Object>::Hash_Table(hashfunction* hash_function) {
-    entries = new Node<Object>*[20];
-    hash_function = hash_function;
-    size = 20;
-}
 
-template <class Object>
-Hash_Table<Object>::Hash_Table(int size) {
-    entries = new Node<Object>*[size];
-    hash_function = hash_fnv1;
-    size = size;
-}
-
-template <class Object>
-Hash_Table<Object>::Hash_Table() {
-    entries = new Node<Object>*[20];
-    hash_function = hash_fnv1;
-    size = 20;
-}
 
 
 // HASH TABLE OPERATIONS
 template <class Object>
-bool Hash_Table<Object>::hash_insert(const char* key, Object* object) {
+hashfunction* Hash_Table<Object>::getHashFunction() {
+    return this->hash_function;
+}
+
+template <class Object> // TODO
+bool Hash_Table<Object>::hash_insert(const string key, Object* object) {
+    int index = hash_function(key, key.size()); // calculates the absolute hash value
+    index = index % size; // mods with the size of the able to force it to fit
+
+    return true;
+}
+
+template <class Object> // TODO
+Object* Hash_Table<Object>::hash_delete(const string key) {
 
 }
 
-template <class Object>
-Object* Hash_Table<Object>::hash_delete(const char* key) {
+template <class Object> // TODO
+Node<Object>* Hash_Table<Object>::hash_get_entry(const string key, int index) {
 
 }
 
-template <class Object>
-Node<Object>* Hash_Table<Object>::hash_get_entry(const char* key, int index) {
-
-}
-
-template <class Object>
+template <class Object> // TODO
 void Hash_Table<Object>::printTable() {
 
 }
