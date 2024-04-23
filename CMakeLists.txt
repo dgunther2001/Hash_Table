@@ -4,9 +4,10 @@ project(generic_hash_table)
 add_subdirectory(include)
 add_subdirectory(src)
 
-option(BUILD_TESTS "Test files option active..." ON)
+option(BUILD_EXAMPLES "Test files option active..." ON)
 
-if (BUILD_TESTS)
+if (BUILD_EXAMPLES)
     message(STATUS "Building tests...")
     add_subdirectory(tests)
 endif()
+

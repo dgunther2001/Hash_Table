@@ -1,1 +1,1 @@
-project(general_hash_table)
+project(generic_hash_table)
