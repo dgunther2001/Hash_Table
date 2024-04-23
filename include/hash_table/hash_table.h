@@ -16,19 +16,19 @@ uint64_t hash_fnv1(const char* data, size_t length) {
     return hashValue;
 }
 
-template <typename Object>
+template <class Object>
 class Node {
     Object* object; // a generic object type
     Node* next; // allows us to chain entries of the hash table for collisions (glorified linked list)
     char* key; // specify the key (key should be some attribute of the object)
 
-    Node();
+    Node(Object* object, char* key);
 };
 
-template <typename Object>
+template <class Object>
 class Hash_Table {
 
-    Node* entries[];
+    Node<Object>** entries;
     hashfunction* hash_function;
     int size;
 
@@ -39,7 +39,8 @@ class Hash_Table {
 
     bool hash_insert(const char* key, Object* object);
     Object* hash_delete(const char* key);
-    Node* hash_get_entry(const char* key, int index);
+    Node<Object>* hash_get_entry(const char* key, int index);
+    void printTable();
 
 
 };
