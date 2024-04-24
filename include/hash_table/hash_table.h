@@ -48,11 +48,11 @@ public:
         key = k;
     }
 
-    Node(Object obj, std::string k) {
-        object = obj;
+    Node(Object obj, std::string k) : object(obj) {
         key = k;
         next = NULL;
     }
+    
     ~Node() {
 
     }
