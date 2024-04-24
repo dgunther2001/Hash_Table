@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <string>
 #include <iostream>
+#include <optional>
 
 using namespace std;
 
@@ -128,9 +129,6 @@ public:
 
     }
 
-
-
-    
     Object hash_delete(string key) {
         int index = hash_function(key) % getSize();
 
@@ -145,6 +143,7 @@ public:
             previousNode = currentNode;
             currentNode = currentNode->getNext();
         }
+
 
         if (currentNode == NULL) {
             return Object();
@@ -176,15 +175,6 @@ public:
     } 
 
 
-    
-
-    
-    Node<Object>* hash_get_entry(string key, int index) {
-
-    }
-    
-
-
     void printTable() { 
     
         Node<Object>* newNode;
@@ -207,8 +197,24 @@ public:
 
     }
 
-};
+    Node<Object>* hash_get_entry(string key) {
+        int index = hash_function(key) % getSize();
+        Node<Object>* currentNode = entries[index];
+        Node<Object>* previousNode = NULL;
 
-//#include "../../src/hash_table.cpp"
+        while (currentNode != NULL && currentNode->getKey() != key) {
+            previousNode = currentNode;
+            currentNode = currentNode->getNext();
+        }
+
+        if (currentNode == NULL) {
+            return NULL;
+        } else {
+            return currentNode;
+        }
+    }
+    
+
+};
 
 #endif

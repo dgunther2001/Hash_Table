@@ -19,22 +19,22 @@ int main() {
 
     myTable.hash_insert("Hannah", 22);
     myTable.hash_insert("Daniel", 23);
-    myTable.hash_insert("Josh", 23);
-    myTable.hash_insert("Zach", 23);
-    myTable.hash_insert("Deb", 23);
-    myTable.hash_insert("Lew", 23);
-    myTable.hash_insert("Joey", 23);
-    myTable.hash_insert("Lars", 23);
-    myTable.hash_insert("Donna", 23);
-    myTable.hash_insert("Heather", 23);
-    myTable.hash_insert("Bill", 23);
-    myTable.hash_insert("Elon", 23);
-    myTable.hash_insert("Janie", 23);
-    myTable.hash_insert("Connor", 23);
-    myTable.hash_insert("Conner", 23);
-    myTable.hash_insert("Michael", 23);
-    myTable.hash_insert("Charlie", 23);
-    myTable.hash_insert("Paul", 23);
+    myTable.hash_insert("Josh", 24);
+    myTable.hash_insert("Zach", 25);
+    myTable.hash_insert("Deb", 37);
+    myTable.hash_insert("Lew", 66);
+    myTable.hash_insert("Joey", 33);
+    myTable.hash_insert("Lars", 25);
+    myTable.hash_insert("Donna", 11);
+    myTable.hash_insert("Heather", 2345);
+    myTable.hash_insert("Bill", 22345);
+    myTable.hash_insert("Elon", 2675);
+    myTable.hash_insert("Janie", 28655);
+    myTable.hash_insert("Connor", 2546);
+    myTable.hash_insert("Conner", 2345653);
+    myTable.hash_insert("Michael", 978574);
+    myTable.hash_insert("Charlie", 76654567);
+    myTable.hash_insert("Paul", 6547355);
 
     //
 
@@ -57,6 +57,12 @@ int main() {
 
 
     myTable.printTable();
+
+
+    cout << endl;
+
+    Node<int>* myNode = myTable.hash_get_entry("Paul");
+    cout << myNode->getKey() << ": " <<  myNode->getObject() << endl;
 
     //cout << correct << endl;
 
