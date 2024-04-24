@@ -20,7 +20,7 @@ uint64_t hash_fnv1_default(std::string data) {
     return hashValue;
 }
 
-template <class Object>
+template <typename Object>
 class Node {
 private:
     Object object; // a generic object type
@@ -58,7 +58,7 @@ public:
     }
 };
 
-template <class Object>
+template <typename Object>
 class Hash_Table {
 private:
     //Node<Object>** entries;
