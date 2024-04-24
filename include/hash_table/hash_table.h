@@ -210,6 +210,23 @@ public:
             return currentNode;
         }
     }
+
+    bool hashContains(std::string k) {
+        int index = hash_function(k) % getSize();
+        Node<Object>* currentNode = entries[index];
+        Node<Object>* previousNode = NULL;
+
+        while (currentNode != NULL && currentNode->getKey() != k) {
+            previousNode = currentNode;
+            currentNode = currentNode->getNext();
+        }
+
+        if (currentNode == NULL) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     
 
 };
