@@ -43,6 +43,21 @@ int main() {
 
     myTable.printTable();
 
+    cout << "\n";
+
+    myTable.hash_delete("Michael");
+    myTable.hash_delete("Joey");
+    myTable.hash_delete("Lew");
+    myTable.hash_delete("Hannah");
+    myTable.hash_delete("Janie");
+    int i = myTable.hash_delete("Josh");
+    myTable.hash_delete("Jimmy");
+
+    //cout << i << endl;
+
+
+    myTable.printTable();
+
     //cout << correct << endl;
 
     

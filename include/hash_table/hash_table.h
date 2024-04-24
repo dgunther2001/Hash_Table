@@ -116,7 +116,6 @@ public:
             return true;
         } 
 
-        // TODO => implement chaining
         else {
             Node<Object>* newNode = new Node<Object>(object, key);
             Node<Object>* nextNode = entries[index];
@@ -131,9 +130,59 @@ public:
 
 
 
+    
+    Object hash_delete(string key) {
+        int index = hash_function(key) % getSize();
 
-    Object* hash_delete(const string key);
-    Node<Object>* hash_get_entry(string key, int index);
+        Node<Object>* currentNode = entries[index];
+        Node<Object>* previousNode = NULL;
+
+        if (currentNode == NULL) {
+            return Object();
+        }
+
+        while (currentNode != NULL && currentNode->getKey() != key) {
+            previousNode = currentNode;
+            currentNode = currentNode->getNext();
+        }
+
+        if (currentNode == NULL) {
+            return Object();
+        }
+
+        if (previousNode == NULL) { // IF WE ARE AT THE HEAD OF THE LIST
+            if (currentNode->getNext() != NULL) {
+                Node<Object>* nextNode = currentNode->getNext();
+                entries[index] = nextNode;
+                return currentNode->getObject();
+            } else {
+                entries[index] = NULL;
+                return currentNode->getObject();
+            }
+        } else { // OTHERISE, PREVIOUS NDOE EXISTS
+            if (currentNode->getNext() == NULL) { // IF THE CURRENT NODE IS THE LAST ELEMENT OF THE LINKED LIST
+                previousNode->setNext(NULL);
+                return currentNode->getObject();
+            }
+            else { // IF THE CURRENT NODE IS IN THE MIDDLE OF THE LINKED LIST
+                Node<Object>* nextNode = currentNode->getNext();
+                previousNode->setNext(nextNode);
+                return currentNode->getObject();
+            }
+        }
+
+
+
+    } 
+
+
+    
+
+    
+    Node<Object>* hash_get_entry(string key, int index) {
+
+    }
+    
 
 
     void printTable() { 
@@ -150,26 +199,13 @@ public:
                     if (newNode->getNext() != NULL) {
                         cout << "\t -- \t";
                     }
-
-
                     newNode = newNode->getNext();
-
                 }
-
-
-
-
-
             } 
             cout << endl;
         }
-        
-
-    
-        
 
     }
-
 
 };
 
