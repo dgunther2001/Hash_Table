@@ -6,14 +6,11 @@
 #include <iostream>
 #include <optional>
 
-using namespace std;
-
-
-typedef uint64_t hashfunction (const string);
+typedef uint64_t hashfunction (const std::string);
 
 #define FNV_PRIME 0x100000001b3
 #define FNV_OFFSET 0xcbf29ce48422325UL // most optimal offset for collision managment and getting a hash value of 0
-uint64_t hash_fnv1_default(string data) {
+uint64_t hash_fnv1_default(std::string data) {
     uint64_t hashValue = FNV_OFFSET;
     int length = data.size();
     for (int i = 0; i < length; i++) {
@@ -28,7 +25,7 @@ class Node {
 private:
     Object object; // a generic object type
     Node* next; // allows us to chain entries of the hash table for collisions (glorified linked list)
-    string key; // specify the key (key should be some attribute of the object)
+    std::string key; // specify the key (key should be some attribute of the object)
 
 public:
     Object getObject(void) {
@@ -37,7 +34,7 @@ public:
     Node* getNext(void) {
         return next;
     }
-    string getKey(void) {
+    std::string getKey(void) {
         return key;
     }
 
@@ -47,11 +44,11 @@ public:
     void setNext(Node* n) {
         next = n;
     }
-    void setKey(string k) {
+    void setKey(std::string k) {
         key = k;
     }
 
-    Node(Object obj, string k) {
+    Node(Object obj, std::string k) {
         object = obj;
         key = k;
         next = NULL;
@@ -107,7 +104,7 @@ public:
         return size;
     }
 
-    bool hash_insert(string key, Object object) {
+    bool hash_insert(std::string key, Object object) {
         int index = hash_function(key) % getSize();
 
         if (entries[index] == NULL) {
@@ -129,7 +126,7 @@ public:
 
     }
 
-    Object hash_delete(string key) {
+    Object hash_delete(std::string key) {
         int index = hash_function(key) % getSize();
 
         Node<Object>* currentNode = entries[index];
@@ -181,23 +178,23 @@ public:
         for (int i = 0; i < getSize(); i++) {
             newNode = entries[i];
 
-            cout << i << "\t|\t";
+            std::cout << i << "\t|\t";
             if (newNode != NULL) {
                 while(newNode != NULL) {
-                    cout << newNode->getKey();
+                    std::cout << newNode->getKey();
 
                     if (newNode->getNext() != NULL) {
-                        cout << "\t -- \t";
+                        std::cout << "\t -- \t";
                     }
                     newNode = newNode->getNext();
                 }
             } 
-            cout << endl;
+            std::cout << "\n";
         }
 
     }
 
-    Node<Object>* hash_get_entry(string key) {
+    Node<Object>* hash_get_entry(std::string key) {
         int index = hash_function(key) % getSize();
         Node<Object>* currentNode = entries[index];
         Node<Object>* previousNode = NULL;
