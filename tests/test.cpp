@@ -15,10 +15,27 @@ int main() {
 
 
 
-    Hash_Table<int> myTable;
+    Hash_Table<int> myTable(10);
 
     myTable.hash_insert("Hannah", 22);
     myTable.hash_insert("Daniel", 23);
+    myTable.hash_insert("Josh", 23);
+    myTable.hash_insert("Zach", 23);
+    myTable.hash_insert("Deb", 23);
+    myTable.hash_insert("Lew", 23);
+    myTable.hash_insert("Joey", 23);
+    myTable.hash_insert("Lars", 23);
+    myTable.hash_insert("Donna", 23);
+    myTable.hash_insert("Heather", 23);
+    myTable.hash_insert("Bill", 23);
+    myTable.hash_insert("Elon", 23);
+    myTable.hash_insert("Janie", 23);
+    myTable.hash_insert("Connor", 23);
+    myTable.hash_insert("Conner", 23);
+    myTable.hash_insert("Michael", 23);
+    myTable.hash_insert("Charlie", 23);
+    myTable.hash_insert("Paul", 23);
+
     //
 
     //cout << myTable.entries[16]->getKey() << endl;

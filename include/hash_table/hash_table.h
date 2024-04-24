@@ -118,7 +118,13 @@ public:
 
         // TODO => implement chaining
         else {
-            return false;
+            Node<Object>* newNode = new Node<Object>(object, key);
+            Node<Object>* nextNode = entries[index];
+
+            newNode->setNext(nextNode);
+            entries[index] = newNode;
+
+            return true;
         }
 
     }
@@ -130,23 +136,30 @@ public:
     Node<Object>* hash_get_entry(string key, int index);
 
 
-    void printTable() { // IMPLEMENT CHAINED PRINTING
+    void printTable() { 
     
-        
+        Node<Object>* newNode;
         for (int i = 0; i < getSize(); i++) {
+            newNode = entries[i];
 
-            cout << i << ":\t -- \t";
-            if (entries[i] != NULL) {
-                /* TODO => IMPLEMENT PRINTING OF CONSECUTIVE CHAINING
-                while(entries[i]->getNext() != NULL) {
+            cout << i << "\t|\t";
+            if (newNode != NULL) {
+                while(newNode != NULL) {
+                    cout << newNode->getKey();
+
+                    if (newNode->getNext() != NULL) {
+                        cout << "\t -- \t";
+                    }
+
+
+                    newNode = newNode->getNext();
 
                 }
-                */
 
 
 
 
-                cout << entries[i]->getKey();
+
             } 
             cout << endl;
         }
