@@ -8,12 +8,13 @@
 using namespace std;
 
 
-typedef uint64_t hashfunction (const string, size_t length);
+typedef uint64_t hashfunction (const string);
 
 #define FNV_PRIME 0x100000001b3
 #define FNV_OFFSET 0xcbf29ce48422325UL // most optimal offset for collision managment and getting a hash value of 0
-uint64_t hash_fnv1_default(string data, size_t length) {
+uint64_t hash_fnv1_default(string data) {
     uint64_t hashValue = FNV_OFFSET;
+    int length = data.size();
     for (int i = 0; i < length; i++) {
         hashValue = hashValue * FNV_PRIME; // multiply the intial hashvalue by a prime number
         hashValue = hashValue ^ data[i]; // then xor the hashvalue with the ascii code (in binary) of the "i'th" character in the text being hashed
@@ -62,27 +63,29 @@ public:
 template <class Object>
 class Hash_Table {
 private:
-    Node<Object>** entries;
+    //Node<Object>** entries;
     hashfunction* hash_function;
     int size;
 
 public:
-    Hash_Table(hashfunction* hash_function, int size) {
-        entries = new Node<Object>*[size];
-        hash_function = hash_function;
-        size = size;
+    Node<Object>** entries; // MAKE THIS PRIVATE AGAIN
+
+    Hash_Table(hashfunction* hf, int s) {
+        entries = new Node<Object>*[s];
+        hash_function = hf;
+        size = s;
     }
 
-    Hash_Table(hashfunction* hash_function) {
+    Hash_Table(hashfunction* hf) {
         entries = new Node<Object>*[20];
-        hash_function = hash_function;
+        hash_function = hf;
         size = 20;
     }
 
-    Hash_Table(int size) {
-        entries = new Node<Object>*[size];
+    Hash_Table(int s) {
+        entries = new Node<Object>*[s];
         hash_function = hash_fnv1_default;
-        size = size;
+        size = s;
     }
 
     Hash_Table() {
@@ -95,13 +98,64 @@ public:
 
     }
 
-    hashfunction* getHashFunction();
+    hashfunction* getHashFunction() {
+        return hash_function;
+    }
 
-    bool hash_insert(const string key, Object* object);
+    int getSize() {
+        return size;
+    }
+
+    bool hash_insert(string key, Object object) {
+        int index = hash_function(key) % getSize();
+
+        if (entries[index] == NULL) {
+            Node<Object>* newNode = new Node<Object>(object, key);
+            entries[index] = newNode;
+
+            return true;
+        } 
+
+        // TODO => implement chaining
+        else {
+            return false;
+        }
+
+    }
+
+
+
+
     Object* hash_delete(const string key);
-    Node<Object>* hash_get_entry(const string key, int index);
-    void printTable();
+    Node<Object>* hash_get_entry(string key, int index);
+
+
+    void printTable() { // IMPLEMENT CHAINED PRINTING
     
+        
+        for (int i = 0; i < getSize(); i++) {
+
+            cout << i << ":\t -- \t";
+            if (entries[i] != NULL) {
+                /* TODO => IMPLEMENT PRINTING OF CONSECUTIVE CHAINING
+                while(entries[i]->getNext() != NULL) {
+
+                }
+                */
+
+
+
+
+                cout << entries[i]->getKey();
+            } 
+            cout << endl;
+        }
+        
+
+    
+        
+
+    }
 
 
 };
